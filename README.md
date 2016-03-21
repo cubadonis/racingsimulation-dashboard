@@ -1,2 +1,5 @@
 # racingsimulation-dashboard
-Dashboard Software (based on Arduino SDK)
+Dashboard Software 
+
+Additional Infos and Help
+IRC: #w0rk @ Quakenet
