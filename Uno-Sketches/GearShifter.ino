@@ -29,21 +29,19 @@ const byte rows[] = {
 
 // The display buffer
 // (1 = ON, 0 = OFF)
-byte gear1[] = {B00000000,B00001000,B00011000,B00101000,B00001000,B00001000,B00001000,B00000000};
-byte gear2[] = {B00000000,B00111100,B00100100,B00000100,B00111100,B00100000,B00111100,B00000000};
-byte gear3[] = {B00000000,B00111100,B00000100,B00000100,B00111100,B00000100,B00111100,B00000000};
-byte gear4[] = {B00000000,B00100100,B00100100,B00100100,B00111100,B00000100,B00000100,B00000000};
-byte gear5[] = {B00000000,B00111100,B00100000,B00100000,B00111100,B00000100,B00111100,B00000000};
-byte gear6[] = {B00000000,B00111100,B00100000,B00100000,B00111100,B00100100,B00111100,B00000000};
-byte gear7[] = {B00000000,B00111100,B00100000,B00100000,B00111100,B00100100,B00111100,B00000000};
-byte gearN[] = {B00000000,B00110000,B00101000,B00100100,B00100100,B00100100,B00100100,B00000000};
-byte gearR[] = {B00000000,B00111100,B00100100,B00101100,B00110000,B00101000,B00100100,B00000000};
+byte gear[9][8] = {
+	{B00000000,B00110000,B00101000,B00100100,B00100100,B00100100,B00100100,B00000000},		// N
+	{B00000000,B00001000,B00011000,B00101000,B00001000,B00001000,B00001000,B00000000},		// 1
+	{B00000000,B00111100,B00100100,B00000100,B00111100,B00100000,B00111100,B00000000},		// 2
+	{B00000000,B00111100,B00000100,B00000100,B00111100,B00000100,B00111100,B00000000},		// 3
+	{B00000000,B00100100,B00100100,B00100100,B00111100,B00000100,B00000100,B00000000},		// 4
+	{B00000000,B00111100,B00100000,B00100000,B00111100,B00000100,B00111100,B00000000},		// 5
+	{B00000000,B00111100,B00100000,B00100000,B00111100,B00100100,B00111100,B00000000},		// 6
+	{B00000000,B00111100,B00100000,B00100000,B00111100,B00100100,B00111100,B00000000}, 		// 7
+	{B00000000,B00111100,B00100100,B00101100,B00110000,B00101000,B00100100,B00000000},		// R
+};
 
-
-int GearAct;
-int GearCount;
-int GearUp;
-int GearDown;
+int GearCount = 0;
 
 
 void setup() {
@@ -66,55 +64,30 @@ void setup() {
     
 }
 
+
 void loop() {
+	int GearUp = digitalRead(A4);
+	int GearDown = digitalRead(A5);
 
-  GearUp = digitalRead(A4);
-  GearDown = digitalRead(A5);
-
-  if (GearUp == 1)
-  { 
-    if (GearDown == 0)
-    { 
-      GearCount = GearAct + 1;
-//      shifting();
-    }
-  }
-  else if (GearDown == 1)
-  {  
-    if (GearUp == 0)
-    {
-      GearCount = GearAct - 1;
-//      shifting();
-    }
-  }
-  else 
-  {
-    shifting();
-  }  
+	if ((GearUp == 1) && (GearDown == 0)){														// GearUp
+		GearCount += 1:
+	}
+	if ((GearUp == 0) && (GearDown == 1)){														// GearDown
+		GearCount -= 1;
+	} else {
+		shifting();
+	}
 }  
 
 
 void shifting(){
-if (GearCount ==  0) {
-drawScreen(gearN);
-} else if (GearCount ==  1) {
-drawScreen(gear1);
-} else if (GearCount ==  2) {
-drawScreen(gear2);
-} else if (GearCount ==  3) {
-drawScreen(gear3);
-} else if (GearCount ==  4) {
-drawScreen(gear4);
-} else if (GearCount ==  5) {
-drawScreen(gear5);
-} else if (GearCount ==  5) {
-drawScreen(gear6); 
-} else if (GearCount ==  6) {
-drawScreen(gear7);
-} else {
-drawScreen(gearR);
+	if ((GearCount < 0) || (GearCount > 7)){
+		drawScreen(gear[8]);
+	} else {
+		drawScreen(gear[GearCount]);
+	}
 }
-}
+
 
 void drawScreen(byte buffer2[]){
      
@@ -144,4 +117,3 @@ void setColumns(byte b) {
     // If the polarity of your matrix is the opposite of mine
     // remove all the '~' above.
 }
-
