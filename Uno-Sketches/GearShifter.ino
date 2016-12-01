@@ -1,8 +1,8 @@
-//code write by Moz for YouTube changel LogMaker360, 12-11-2015
-//code belongs to this video: 
-// Pins
-// Fill in the pins you used on your own setup.
-// WARNING: Make sure you have resistors connected between the rows and the arduino.
+//
+// code based on source code by moz from youtube channel LogMaker
+//
+// expanded and modified by #w0rk
+// 
 
 
 #define ROW_1 2
@@ -30,6 +30,7 @@ const byte rows[] = {
 // The display buffer
 // (1 = ON, 0 = OFF)
 byte gear[9][8] = {
+	{B00000000,B00111100,B00100100,B00101100,B00110000,B00101000,B00100100,B00000000},		// R
 	{B00000000,B00110000,B00101000,B00100100,B00100100,B00100100,B00100100,B00000000},		// N
 	{B00000000,B00001000,B00011000,B00101000,B00001000,B00001000,B00001000,B00000000},		// 1
 	{B00000000,B00111100,B00100100,B00000100,B00111100,B00100000,B00111100,B00000000},		// 2
@@ -38,7 +39,6 @@ byte gear[9][8] = {
 	{B00000000,B00111100,B00100000,B00100000,B00111100,B00000100,B00111100,B00000000},		// 5
 	{B00000000,B00111100,B00100000,B00100000,B00111100,B00100100,B00111100,B00000000},		// 6
 	{B00000000,B00111100,B00100000,B00100000,B00111100,B00100100,B00111100,B00000000}, 		// 7
-	{B00000000,B00111100,B00100100,B00101100,B00110000,B00101000,B00100100,B00000000},		// R
 };
 
 int GearCount = 0;
@@ -81,8 +81,8 @@ void loop() {
 
 
 void shifting(){
-	if ((GearCount < 0) || (GearCount > 7)){
-		drawScreen(gear[8]);
+	if ((GearCount < 1) || (GearCount > 8)){
+		drawScreen(gear[0]);
 	} else {
 		drawScreen(gear[GearCount]);
 	}
