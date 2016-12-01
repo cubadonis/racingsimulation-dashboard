@@ -41,7 +41,7 @@ byte gear[9][8] = {
 	{B00000000,B00111100,B00100000,B00100000,B00111100,B00100100,B00111100,B00000000}, 		// 7
 };
 
-int GearCount = 0;
+int GearCount = 1;
 
 
 void setup() {
@@ -69,23 +69,15 @@ void loop() {
 	int GearUp = digitalRead(A4);
 	int GearDown = digitalRead(A5);
 
-	if ((GearUp == 1) && (GearDown == 0)){														// GearUp
+	if ((GearUp == 1) && (GearDown == 0) && (GearCount > 8)) {	// GearUp, if possible
 		GearCount += 1:
-	}
-	if ((GearUp == 0) && (GearDown == 1)){														// GearDown
+	}	
+
+	if ((GearUp == 0) && (GearDown == 1) && (GearCount < 1)) {	// GearDown, if possible
 		GearCount -= 1;
-	} else {
-		shifting();
-	}
-}  
+	} 
 
-
-void shifting(){
-	if ((GearCount < 1) || (GearCount > 8)){
-		drawScreen(gear[0]);
-	} else {
-		drawScreen(gear[GearCount]);
-	}
+	drawScreen(gear[GearCount]);
 }
 
 
