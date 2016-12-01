@@ -71,13 +71,24 @@ void loop() {
 
 	if ((GearUp == 1) && (GearDown == 0) && (GearCount > 8)) {	// GearUp, if possible
 		GearCount += 1:
+	//	Serial.print("DEBUG 1: GearCount =");
+	//	Serial.println(GearCount);
+
 	}	
 
 	if ((GearUp == 0) && (GearDown == 1) && (GearCount < 1)) {	// GearDown, if possible
 		GearCount -= 1;
+        
+	//      Serial.print("DEBUG 2: GearCount =");
+        //      Serial.println(GearCount);
+
 	} 
 
 	drawScreen(gear[GearCount]);
+       
+	//      Serial.print("DEBUG 3: GearCount =");
+        //      Serial.println(GearCount);
+
 }
 
 
