@@ -1,6 +1,9 @@
 
 //		8x8 LED Matrix Display
-
+//
+// 	sprite generator for LED MATRIX 8x8
+//	http://embed.plnkr.co/3VUsekP3jC5xwSIQDVHx/preview
+//
 
 	ROW  |  Collumn	 |  Matrix Pin	|  Arduino Pin
 	 1			5		22
